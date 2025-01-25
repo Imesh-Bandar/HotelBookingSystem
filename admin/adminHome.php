@@ -44,11 +44,14 @@
             margin-bottom: 20px;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
 
-        th, td {
+        th,
+        td {
             padding: 8px;
             text-align: left;
         }
@@ -73,7 +76,9 @@
             margin-bottom: 5px;
         }
 
-        .form-container input, .form-container select, .form-container button {
+        .form-container input,
+        .form-container select,
+        .form-container button {
             margin-bottom: 10px;
             padding: 10px;
             border: 1px solid #ddd;
@@ -93,21 +98,25 @@
 </head>
 
 <body>
-    <?php session_start(); 
+    <?php session_start();
 
-    if(isset($_POST['logout'])) {
-        session_destroy();
-        header("Location: ../index.php");
+
+    if (isset($_SESSION['admin-username'])) {
+        if (isset($_POST['logout'])) {
+            session_unset();
+            session_destroy();
+            header("Location: ../index.php");
+        }
     }
-    
-    
-    
+
     ?>
 
     <div class="navbar">
         <a href="#">Home</a>
         <a href="#">Bookings</a>
-        <a href="#" name="logout">Logout</a>
+        <form action="./adminHome.php" method="post">
+            <button name="logout">LOGOUT</button>
+        </form>
     </div>
 
     <div class="container">
