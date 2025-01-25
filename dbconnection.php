@@ -9,7 +9,8 @@ $db="hotelmanagementsystem";
 $connection=mysqli_connect($server,$user,$password,$db);
 
 if($connection){
-    echo "Connection Successfull";
+    //echo "Connection Successfull";
+    return $connection;
 }
 else{
     echo "Connection Failed";
