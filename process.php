@@ -86,3 +86,51 @@ if (isset($_POST['booking'])) {
         header("Location:./bookings.php");
     }
 }
+
+
+//admin login
+if(isset($_POST['admin'])){
+    $adminusername=$_POST['username'];
+    $password=$_POST['password'];
+
+    //sql query to check if the user is registered
+    $sql="SELECT * FROM ADMIN WHERE username='$adminusername' AND password='$password';";
+
+    //execute the query
+    $result=mysqli_query($connection,$sql);
+
+    if(mysqli_num_rows($result)>0){
+        echo "Admin Login Successfull";
+        header("Location:./admin/adminHome.php");
+        $_SESSION['admin-username']=$adminusername;
+    }else{
+        echo "Admin Login Failed";
+        header("Location:./admin/adminlogin.php");
+    }
+}
+
+//bookings
+if (isset($_POST['adminbooking'])) {
+    //echo "Booking button clicked";
+    $useremail = $_POST['useremail'];
+    $hotel = $_POST['hotel'];
+    $startdate = $_POST['startdate'];
+    $enddate = $_POST['enddate'];
+
+    //sql query
+    $sql = "INSERT INTO booking(uemail,hotel,startdate,enddate) VALUES('$useremail','$hotel','$startdate','$enddate');";
+
+    //execute the query
+    $result = mysqli_query($connection, $sql);
+
+    if($result){
+        echo "Booking Successfull";
+        
+    }else{
+        echo "Booking Failed";
+        
+    }
+}
+
+
+
